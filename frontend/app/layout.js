@@ -1,5 +1,3 @@
-import Header from './components/Header';
-import Footer from './components/Footer';
 import { CartProvider } from '../context/CartContext';
 import { Outfit, Tenor_Sans } from "next/font/google";
 import "./globals.css";
@@ -22,14 +20,14 @@ export const metadata = {
   description: "Modern Fashion for Everyone",
 };
 
+import ClientLayout from './ClientLayout';
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${outfit.variable} ${tenorSans.variable} antialiased flex flex-col min-h-screen bg-[var(--background)] text-[var(--foreground)]`}>
         <CartProvider>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+          <ClientLayout>{children}</ClientLayout>
         </CartProvider>
       </body>
     </html>

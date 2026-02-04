@@ -14,6 +14,13 @@
   --color-accent: #C8B6A6;
   --color-muted: #EADCD6;
   --color-border: #DBC8C0;
+
+  /* TrendAura Premium Palette */
+  --color-silk: #FDF4F0;
+  --color-stone: #4A4A4A;
+  --color-clay: #8D7B68;
+  --color-sand: #EADCD6;
+  --color-charcoal: #2D2D2D;
 }
 
 /* 
@@ -23,6 +30,8 @@
 :root {
   --background: #FDF4F0;
   --foreground: #4A4A4A;
+  --card-shadow: 0 4px 20px -2px rgba(141, 123, 104, 0.1);
+  --glass-bg: rgba(253, 244, 240, 0.7);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,6 +47,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
@@ -48,4 +58,17 @@ h5,
 h6 {
   font-family: var(--font-serif);
   color: #2D2D2D;
+  letter-spacing: -0.02em;
+}
+
+/* Custom Utilities */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(219, 200, 192, 0.3);
+}
+
+.premium-shadow {
+  box-shadow: var(--card-shadow);
 }

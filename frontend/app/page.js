@@ -87,57 +87,76 @@ export default function Home() {
     <div className="bg-[var(--background)] min-h-screen overflow-x-hidden">
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-20 lg:pt-32 lg:pb-40 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-silk/50 -z-10" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-sand/30 rounded-full blur-3xl -z-10" />
 
-            {/* Text Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+            {/* Left Content */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={staggerContainer}
-              className="z-10 relative"
+              className="lg:col-span-5 z-10"
             >
-              <motion.p variants={fadeInUp} className="text-[#8D7B68] uppercase tracking-[0.2em] text-sm font-bold mb-6">
-                Consciously Crafted
-              </motion.p>
-              <motion.h1 variants={fadeInUp} className="text-6xl md:text-8xl lg:text-9xl font-serif text-[#2D2D2D] leading-[0.85] mb-8 tracking-tighter">
-                Fash<br />ion<br />Feels<br />Good
+              <motion.span variants={fadeInUp} className="inline-block text-clay font-bold uppercase tracking-[0.4em] text-[10px] mb-6">
+                Collection 2026
+              </motion.span>
+              <motion.h1 variants={fadeInUp} className="text-7xl md:text-8xl lg:text-[10rem] font-serif text-charcoal leading-[0.8] mb-8 tracking-tighter">
+                Elegance <br /> Simplified
               </motion.h1>
-              <motion.div variants={fadeInUp} className="h-px w-24 bg-[#8D7B68] mb-10" />
-              <motion.p variants={fadeInUp} className="text-gray-600 text-lg max-w-md mb-12 leading-relaxed font-sans">
-                Sustainable essentials made from organic materials. Designed for the modern wardrobe, crafted for a better future.
+              <motion.p variants={fadeInUp} className="text-stone/80 text-lg max-w-sm mb-12 leading-relaxed font-sans font-light">
+                Discover our curated selection of sustainable essentials, designed for the modern silhouette and crafted for longevity.
               </motion.p>
-              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-5">
-                <Link href="/shop" className="group inline-flex items-center justify-center bg-[#2D2D2D] text-white px-10 py-4 text-sm uppercase tracking-widest hover:bg-[#8D7B68] transition-colors duration-300">
-                  Shop Collection <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link href="/about" className="inline-flex items-center justify-center text-[#2D2D2D] px-10 py-4 text-sm uppercase tracking-widest border border-[#2D2D2D] hover:bg-[#2D2D2D] hover:text-white transition-all duration-300">
-                  Our Story
+              <motion.div variants={fadeInUp} className="flex gap-8 items-center">
+                <Link href="/shop" className="group flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-charcoal hover:text-clay transition-colors">
+                  <span className="relative">
+                    Explore Shop
+                    <span className="absolute -bottom-1 left-0 w-full h-px bg-charcoal scale-x-100 group-hover:scale-x-0 transition-transform origin-right" />
+                    <span className="absolute -bottom-1 left-0 w-full h-px bg-clay scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                  </span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                 </Link>
               </motion.div>
             </motion.div>
 
-            {/* Hero Image - Arch Shape */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative h-[700px] w-full hidden lg:block"
-            >
-              {/* Decorative Circle */}
-              <div className="absolute top-10 right-[-20px] w-64 h-64 bg-[#EADCD6] rounded-full mix-blend-multiply opacity-50 blur-3xl" />
-
-              <div className="absolute top-0 right-0 w-[90%] h-full rounded-t-[20rem] overflow-hidden shadow-2xl">
+            {/* Right Images - Editorial Grid */}
+            <div className="lg:col-span-7 relative h-[600px] lg:h-[800px]">
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] }}
+                className="absolute top-0 right-0 w-2/3 h-[85%] rounded-[2rem] overflow-hidden shadow-2xl z-20"
+              >
                 <Image
-                  src="/girl3.AVIF"
-                  alt="Sustainable Fashion"
+                  src="/girl3.avif"
+                  alt="Fashion"
                   fill
-                  className="object-cover object-top hover:scale-105 transition-transform duration-[2s]"
+                  className="object-cover hover:scale-110 transition-transform duration-[3s]"
                   priority
                 />
-              </div>
-            </motion.div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.5, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
+                className="absolute bottom-0 left-0 w-1/2 h-2/3 rounded-3xl overflow-hidden shadow-xl z-20 border-[12px] border-silk"
+              >
+                <Image
+                  src="/girl6.jpg"
+                  alt="Detail"
+                  fill
+                  className="object-cover hover:scale-110 transition-transform duration-[3s]"
+                />
+              </motion.div>
+
+              {/* Decorative Circle */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-clay/10 rounded-full -z-10" />
+            </div>
 
           </div>
         </div>

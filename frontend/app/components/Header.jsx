@@ -6,96 +6,100 @@ import { ShoppingCart, User, Menu } from 'lucide-react';
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+
         const storedUserInfo = localStorage.getItem('userInfo');
         if (storedUserInfo) {
             setUserInfo(JSON.parse(storedUserInfo));
         }
+
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
-        <nav className="bg-[var(--background)]/80 backdrop-blur-md sticky top-0 z-50 border-b border-[#DBC8C0]/30 transition-all duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-20">
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass h-16 shadow-sm border-b' : 'bg-transparent h-24'}`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+                <div className="flex justify-between items-center h-full">
                     {/* Logo & Desktop Nav */}
-                    <div className="flex items-center">
-                        <Link href="/" className="flex-shrink-0 flex items-center">
-                            <span className="text-3xl font-serif text-[#2D2D2D] tracking-tighter">
-                                Trend<span className="text-[#8D7B68] italic">Aura.</span>
+                    <div className="flex items-center gap-16">
+                        <Link href="/" className="flex-shrink-0 group">
+                            <span className="text-2xl md:text-3xl font-serif text-charcoal tracking-tighter transition-all group-hover:tracking-normal">
+                                Trend<span className="text-clay italic">Aura.</span>
                             </span>
                         </Link>
-                        <div className="hidden sm:ml-20 sm:flex sm:space-x-12">
+                        <div className="hidden lg:flex items-center space-x-10">
                             {['Home', 'Shop', 'About Us'].map((item) => (
                                 <Link
                                     key={item}
                                     href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
-                                    className="relative group text-gray-500 hover:text-[#2D2D2D] inline-flex items-center px-1 pt-1 text-sm font-medium uppercase tracking-wider transition-colors h-full"
+                                    className="relative group text-stone/70 hover:text-charcoal text-xs font-bold uppercase tracking-[0.2em] transition-colors"
                                 >
                                     {item}
-                                    <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#8D7B68] transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-clay transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                             ))}
-                            {userInfo && userInfo.isAdmin && (
-                                <Link
-                                    href="/admin"
-                                    className="border-transparent text-[#8D7B68] hover:text-[#6D5B4F] inline-flex items-center px-1 pt-1 text-sm font-medium uppercase tracking-wider"
-                                >
-                                    Admin
-                                </Link>
-                            )}
                         </div>
                     </div>
 
                     {/* Icons */}
-                    <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-10">
-                        {/* Search could go here */}
+                    <div className="flex items-center space-x-6">
+                        {userInfo && userInfo.isAdmin && (
+                            <Link
+                                href="/admin"
+                                className="hidden md:block text- clay text-[10px] font-bold uppercase tracking-widest border border-clay px-4 py-1.5 rounded-full hover:bg-clay hover:text-silk transition-all"
+                            >
+                                Dashboard
+                            </Link>
+                        )}
 
-                        <div className="relative">
-                            {userInfo ? (
-                                <Link href="/profile" className="flex items-center text-sm font-medium text-gray-500 hover:text-[#2D2D2D]">
-                                    <User className="h-5 w-5" strokeWidth={1.5} />
-                                </Link>
-                            ) : (
-                                <Link href="/login" className="flex items-center text-sm font-medium text-gray-500 hover:text-[#2D2D2D]">
-                                    <User className="h-5 w-5" strokeWidth={1.5} />
-                                </Link>
-                            )}
+                        <div className="flex items-center space-x-4">
+                            <Link href={userInfo ? "/profile" : "/login"} className="text-stone hover:text-charcoal transition-colors">
+                                <User className="h-5 w-5" strokeWidth={1.5} />
+                            </Link>
+
+                            <Link href="/cart" className="relative group text-stone hover:text-charcoal transition-colors">
+                                <ShoppingCart className="h-5 w-5" strokeWidth={1.5} />
+                                <span className="absolute -top-1 -right-1 w-2 h-2 bg-clay rounded-full scale-0 group-hover:scale-100 transition-transform"></span>
+                            </Link>
+
+                            {/* Mobile menu button */}
+                            <button
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                className="lg:hidden p-2 text-stone hover:text-charcoal"
+                            >
+                                <Menu className="h-6 w-6" strokeWidth={1.5} />
+                            </button>
                         </div>
-
-                        <Link href="/cart" className="group p-1 rounded-full text-gray-400 hover:text-[#2D2D2D] relative">
-                            <ShoppingCart className="h-5 w-5 text-gray-500 group-hover:text-[#2D2D2D] transition-colors" strokeWidth={1.5} />
-                            {/* Simple dot for cart state if needed */}
-                        </Link>
-                    </div>
-
-                    {/* Mobile menu button */}
-                    <div className="-mr-2 flex items-center sm:hidden">
-                        <button
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            type="button"
-                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
-                        >
-                            <Menu className="block h-6 w-6" aria-hidden="true" strokeWidth={1.5} />
-                        </button>
                     </div>
                 </div>
             </div>
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="sm:hidden bg-[var(--background)] border-b border-[#DBC8C0]">
-                    <div className="pt-2 pb-3 space-y-1">
-                        {['Home', 'Shop', 'About Us', 'Cart', 'Login'].map((item) => (
-                            <Link
-                                key={item}
-                                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
-                                className="border-transparent text-gray-600 hover:bg-[#EADCD6] hover:text-gray-900 block pl-3 pr-4 py-2 text-base font-medium"
-                            >
-                                {item}
-                            </Link>
-                        ))}
-                    </div>
+                <div className="lg:hidden absolute top-full left-0 right-0 glass border-t border-clay/10 py-6 px-4 flex flex-col gap-4 shadow-xl">
+                    {['Home', 'Shop', 'About Us', 'Cart', 'Login'].map((item) => (
+                        <Link
+                            key={item}
+                            href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="text-stone hover:text-clay text-sm font-bold uppercase tracking-widest py-2 border-b border-transparent hover:border-clay/20"
+                        >
+                            {item}
+                        </Link>
+                    ))}
+                    {userInfo && userInfo.isAdmin && (
+                        <Link
+                            href="/admin"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="text-clay text-sm font-bold uppercase tracking-widest py-2"
+                        >
+                            Admin Dashboard
+                        </Link>
+                    )}
                 </div>
             )}
         </nav>

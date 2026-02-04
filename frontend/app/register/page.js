@@ -40,106 +40,103 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col justify-center py-24 sm:px-6 lg:px-8 bg-transparent">
+        <div className="min-h-[90vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-transparent">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <h2 className="mt-6 text-center text-4xl font-serif text-[#2D2D2D] tracking-tight">Create Account</h2>
-                <p className="mt-4 text-center text-sm font-sans text-gray-500 uppercase tracking-widest font-bold">
-                    Already part of the family?{' '}
-                    <Link href="/login" className="text-[#8D7B68] hover:text-[#2D2D2D] transition-colors border-b border-[#8D7B68]">
-                        Sign in here
-                    </Link>
-                </p>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <h2 className="mt-6 text-center text-5xl font-serif text-charcoal tracking-tight">Create <br /> Account</h2>
+                    <p className="mt-6 text-center text-[10px] font-bold text-stone/50 uppercase tracking-[0.3em]">
+                        Already part of the family?{' '}
+                        <Link href="/login" className="text-clay hover:text-charcoal transition-colors border-b border-clay/30">
+                            Sign in
+                        </Link>
+                    </p>
+                </motion.div>
             </div>
 
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-white/50 backdrop-blur-md py-10 px-6 shadow-sm border border-[#DBC8C0]/50 sm:rounded-3xl sm:px-12">
+            <div className="mt-12 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="glass py-12 px-8 shadow-2xl premium-shadow sm:rounded-[2.5rem] sm:px-12"
+                >
                     <form className="space-y-6" onSubmit={submitHandler}>
-                        <div>
-                            <label htmlFor="name" className="block text-xs font-bold uppercase tracking-widest text-[#8D7B68] mb-2">
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="name" className="text-[10px] font-bold uppercase tracking-widest text-clay px-1">
                                 Full Name
                             </label>
-                            <div className="mt-1">
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    autoComplete="name"
-                                    required
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    className="appearance-none block w-full px-4 py-3 bg-white border border-[#DBC8C0] rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#8D7B68] focus:border-[#8D7B68] sm:text-sm transition-all"
-                                    placeholder="Jane Doe"
-                                />
-                            </div>
+                            <input
+                                id="name"
+                                type="text"
+                                required
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="bg-white/50 border border-clay/10 px-6 py-4 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-clay/20 transition-all shadow-sm"
+                                placeholder="Jane Doe"
+                            />
                         </div>
 
-                        <div>
-                            <label htmlFor="email" className="block text-xs font-bold uppercase tracking-widest text-[#8D7B68] mb-2">
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="email" className="text-[10px] font-bold uppercase tracking-widest text-clay px-1">
                                 Email Address
                             </label>
-                            <div className="mt-1">
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="appearance-none block w-full px-4 py-3 bg-white border border-[#DBC8C0] rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#8D7B68] focus:border-[#8D7B68] sm:text-sm transition-all"
-                                    placeholder="your@email.com"
-                                />
-                            </div>
+                            <input
+                                id="email"
+                                type="email"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="bg-white/50 border border-clay/10 px-6 py-4 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-clay/20 transition-all shadow-sm"
+                                placeholder="jane@example.com"
+                            />
                         </div>
 
-                        <div>
-                            <label htmlFor="password" className="block text-xs font-bold uppercase tracking-widest text-[#8D7B68] mb-2">
-                                Password
-                            </label>
-                            <div className="mt-1">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="password" className="text-[10px] font-bold uppercase tracking-widest text-clay px-1">
+                                    Password
+                                </label>
                                 <input
                                     id="password"
-                                    name="password"
                                     type="password"
-                                    autoComplete="new-password"
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="appearance-none block w-full px-4 py-3 bg-white border border-[#DBC8C0] rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#8D7B68] focus:border-[#8D7B68] sm:text-sm transition-all"
-                                    placeholder="Min. 8 characters"
+                                    className="bg-white/50 border border-clay/10 px-6 py-4 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-clay/20 transition-all shadow-sm"
+                                    placeholder="••••••••"
                                 />
                             </div>
-                        </div>
 
-                        <div>
-                            <label htmlFor="confirmPassword" className="block text-xs font-bold uppercase tracking-widest text-[#8D7B68] mb-2">
-                                Confirm Password
-                            </label>
-                            <div className="mt-1">
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="confirmPassword" className="text-[10px] font-bold uppercase tracking-widest text-clay px-1">
+                                    Confirm
+                                </label>
                                 <input
                                     id="confirmPassword"
-                                    name="confirmPassword"
                                     type="password"
-                                    autoComplete="new-password"
                                     required
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="appearance-none block w-full px-4 py-3 bg-white border border-[#DBC8C0] rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#8D7B68] focus:border-[#8D7B68] sm:text-sm transition-all"
-                                    placeholder="Re-enter password"
+                                    className="bg-white/50 border border-clay/10 px-6 py-4 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-clay/20 transition-all shadow-sm"
+                                    placeholder="••••••••"
                                 />
                             </div>
                         </div>
 
-                        <div className="pt-2">
+                        <div className="pt-4">
                             <button
                                 type="submit"
-                                className="w-full flex justify-center py-4 px-6 border border-transparent rounded-xl shadow-lg text-sm font-bold uppercase tracking-widest text-white bg-[#2D2D2D] hover:bg-[#8D7B68] focus:outline-none transition-all duration-300"
+                                className="w-full bg-charcoal text-silk py-6 rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-clay transition-all shadow-xl shadow-charcoal/10"
                             >
                                 Register
                             </button>
                         </div>
                     </form>
-                </div>
+                </motion.div>
             </div>
         </div>
     );

@@ -19,7 +19,7 @@ const deleteProduct = async (req, res) => {
     const product = await Product.findById(req.params.id);
 
     if (product) {
-        await product.remove();
+        await Product.deleteOne({ _id: product._id });
         res.json({ message: 'Product removed' });
     } else {
         res.status(404).json({ message: 'Product not found' });
@@ -27,16 +27,18 @@ const deleteProduct = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
+    const { name, price, description, image, brand, category, countInStock } = req.body;
+
     const product = new Product({
-        name: 'Sample name',
-        price: 0,
+        name: name || 'Sample name',
+        price: price || 0,
         user: req.user._id,
-        image: '/images/sample.jpg',
-        brand: 'Sample brand',
-        category: 'Sample category',
-        countInStock: 0,
+        image: image || '/images/sample.jpg',
+        brand: brand || 'Sample brand',
+        category: category || 'Sample category',
+        countInStock: countInStock || 0,
         numReviews: 0,
-        description: 'Sample description',
+        description: description || 'Sample description',
     });
 
     const createdProduct = await product.save();
