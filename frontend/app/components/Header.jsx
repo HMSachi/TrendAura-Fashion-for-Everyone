@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ShoppingCart, User, Menu, LayoutDashboard } from 'lucide-react';
+import { ShoppingCart, User, Menu } from 'lucide-react';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,125 +15,92 @@ const Header = () => {
     }, []);
 
     return (
-        <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav className="bg-[var(--background)]/80 backdrop-blur-md sticky top-0 z-50 border-b border-[#DBC8C0]/30 transition-all duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    <div className="flex">
+                <div className="flex justify-between h-20">
+                    {/* Logo & Desktop Nav */}
+                    <div className="flex items-center">
                         <Link href="/" className="flex-shrink-0 flex items-center">
-                            <span className="text-2xl font-bold text-gray-900 tracking-tight">
-                                Style<span className="text-indigo-600">Sphere</span>
+                            <span className="text-3xl font-serif text-[#2D2D2D] tracking-tighter">
+                                Trend<span className="text-[#8D7B68] italic">Aura.</span>
                             </span>
                         </Link>
-                        <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                            <Link
-                                href="/"
-                                className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                            >
-                                Home
-                            </Link>
-                            <Link
-                                href="/shop"
-                                className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                            >
-                                Shop
-                            </Link>
-                            <Link
-                                href="/about"
-                                className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                            >
-                                About Us
-                            </Link>
+                        <div className="hidden sm:ml-20 sm:flex sm:space-x-12">
+                            {['Home', 'Shop', 'About Us'].map((item) => (
+                                <Link
+                                    key={item}
+                                    href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                                    className="relative group text-gray-500 hover:text-[#2D2D2D] inline-flex items-center px-1 pt-1 text-sm font-medium uppercase tracking-wider transition-colors h-full"
+                                >
+                                    {item}
+                                    <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#8D7B68] transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                                </Link>
+                            ))}
                             {userInfo && userInfo.isAdmin && (
                                 <Link
                                     href="/admin"
-                                    className="border-transparent text-indigo-600 hover:border-indigo-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                    className="border-transparent text-[#8D7B68] hover:text-[#6D5B4F] inline-flex items-center px-1 pt-1 text-sm font-medium uppercase tracking-wider"
                                 >
                                     Admin
                                 </Link>
                             )}
                         </div>
                     </div>
-                    <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                        <Link href="/cart" className="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 relative">
-                            <span className="sr-only">View cart</span>
-                            <ShoppingCart className="h-6 w-6" aria-hidden="true" />
-                            {/* Cart badge logic here */}
-                        </Link>
-                        <div className="ml-3 relative">
+
+                    {/* Icons */}
+                    <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-10">
+                        {/* Search could go here */}
+
+                        <div className="relative">
                             {userInfo ? (
-                                <Link href="/profile" className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700">
-                                    <User className="h-6 w-6 mr-1" />
-                                    {userInfo.name}
+                                <Link href="/profile" className="flex items-center text-sm font-medium text-gray-500 hover:text-[#2D2D2D]">
+                                    <User className="h-5 w-5" strokeWidth={1.5} />
                                 </Link>
                             ) : (
-                                <Link href="/login" className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700">
-                                    <User className="h-6 w-6 mr-1" />
-                                    Sign In
+                                <Link href="/login" className="flex items-center text-sm font-medium text-gray-500 hover:text-[#2D2D2D]">
+                                    <User className="h-5 w-5" strokeWidth={1.5} />
                                 </Link>
                             )}
                         </div>
+
+                        <Link href="/cart" className="group p-1 rounded-full text-gray-400 hover:text-[#2D2D2D] relative">
+                            <ShoppingCart className="h-5 w-5 text-gray-500 group-hover:text-[#2D2D2D] transition-colors" strokeWidth={1.5} />
+                            {/* Simple dot for cart state if needed */}
+                        </Link>
                     </div>
+
+                    {/* Mobile menu button */}
                     <div className="-mr-2 flex items-center sm:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             type="button"
-                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                            aria-controls="mobile-menu"
-                            aria-expanded="false"
+                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
                         >
-                            <span className="sr-only">Open main menu</span>
-                            <Menu className="block h-6 w-6" aria-hidden="true" />
+                            <Menu className="block h-6 w-6" aria-hidden="true" strokeWidth={1.5} />
                         </button>
                     </div>
                 </div>
             </div>
 
+            {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="sm:hidden" id="mobile-menu">
+                <div className="sm:hidden bg-[var(--background)] border-b border-[#DBC8C0]">
                     <div className="pt-2 pb-3 space-y-1">
-                        <Link
-                            href="/"
-                            className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            href="/shop"
-                            className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                        >
-                            Shop
-                        </Link>
-                        {userInfo && userInfo.isAdmin && (
+                        {['Home', 'Shop', 'About Us', 'Cart', 'Login'].map((item) => (
                             <Link
-                                href="/admin"
-                                className="border-transparent text-indigo-600 hover:bg-gray-50 hover:border-indigo-300 hover:text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                                key={item}
+                                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                                className="border-transparent text-gray-600 hover:bg-[#EADCD6] hover:text-gray-900 block pl-3 pr-4 py-2 text-base font-medium"
                             >
-                                Admin Dashboard
+                                {item}
                             </Link>
-                        )}
-                        <Link
-                            href="/cart"
-                            className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                        >
-                            Cart
-                        </Link>
-                        {userInfo ? (
-                            <div className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-500">
-                                Signed in as {userInfo.name}
-                            </div>
-                        ) : (
-                            <Link
-                                href="/login"
-                                className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                            >
-                                Sign In
-                            </Link>
-                        )}
+                        ))}
                     </div>
                 </div>
             )}
         </nav>
     );
 };
+
 
 export default Header;

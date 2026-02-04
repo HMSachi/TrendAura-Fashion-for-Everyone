@@ -18,11 +18,11 @@ export default async function Shop() {
     }
 
     return (
-        <div className="bg-white">
+        <div className="bg-transparent min-h-screen">
             <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-                <div className="pb-10 border-b border-gray-200">
-                    <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Shop All Products</h1>
-                    <p className="mt-4 text-base text-gray-500">
+                <div className="pb-10 border-b border-[#DBC8C0]">
+                    <h1 className="text-4xl font-serif tracking-tight text-[#2D2D2D]">Shop All Products</h1>
+                    <p className="mt-4 text-base text-gray-500 font-sans">
                         Check out our latest collection of premium clothing and accessories.
                     </p>
                 </div>

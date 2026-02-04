@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { Leaf, RefreshCcw } from 'lucide-react';
 
 async function getProduct(id) {
     const res = await fetch(`http://localhost:5000/api/products/${id}`, { cache: 'no-store' });
@@ -27,44 +28,34 @@ export default async function ProductPage({ params }) {
     }
 
     return (
-        <div className="bg-white">
-            <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-                <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
+        <div className="bg-transparent">
+            <div className="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+                <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 lg:items-start">
                     {/* Image gallery */}
                     <div className="flex-col-reverse">
-                        <div className="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
+                        <div className="w-full aspect-w-1 aspect-h-1 rounded-2xl overflow-hidden bg-[#EADCD6] shadow-sm sm:aspect-w-2 sm:aspect-h-3">
                             <img
                                 src={product.image}
                                 alt={product.name}
-                                className="w-full h-full object-center object-cover"
+                                className="w-full h-full object-center object-cover hover:scale-105 transition-transform duration-700"
                             />
                         </div>
                     </div>
 
                     {/* Product info */}
-                    <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
-                        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{product.name}</h1>
+                    <div className="mt-12 px-4 sm:px-0 lg:mt-0">
+                        <h1 className="text-4xl font-serif tracking-tight text-[#2D2D2D] md:text-5xl lg:text-6xl">{product.name}</h1>
 
-                        <div className="mt-3">
+                        <div className="mt-4 flex items-center justify-between border-b border-[#DBC8C0] pb-6">
                             <h2 className="sr-only">Product information</h2>
-                            <p className="text-3xl text-gray-900">${product.price}</p>
-                        </div>
+                            <p className="text-3xl text-[#8D7B68] font-sans tracking-tight">${product.price}</p>
 
-                        <div className="mt-6">
-                            <h3 className="sr-only">Description</h3>
-                            <div
-                                className="text-base text-gray-700 space-y-6"
-                                dangerouslySetInnerHTML={{ __html: product.description }}
-                            />
-                        </div>
-
-                        <div className="mt-6">
                             <div className="flex items-center">
                                 <div className="flex items-center">
                                     {[0, 1, 2, 3, 4].map((rating) => (
                                         <svg
                                             key={rating}
-                                            className={`h-5 w-5 flex-shrink-0 ${product.rating > rating ? 'text-yellow-400' : 'text-gray-300'
+                                            className={`h-4 w-4 flex-shrink-0 ${product.rating > rating ? 'text-[#8D7B68]' : 'text-gray-300'
                                                 }`}
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20"
@@ -77,20 +68,32 @@ export default async function ProductPage({ params }) {
                                         </svg>
                                     ))}
                                 </div>
-                                <p className="sr-only">{product.rating} out of 5 stars</p>
-                                <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                    {product.numReviews} reviews
-                                </a>
+                                <span className="ml-2 text-sm text-gray-500 font-sans tracking-wider uppercase">{product.numReviews} Reviews</span>
                             </div>
                         </div>
 
-                        <div className="mt-10 flex sm:flex-col1">
+                        <div className="mt-12">
+                            <h3 className="text-sm font-bold text-[#8D7B68] uppercase tracking-widest mb-6">Description</h3>
+                            <div
+                                className="text-base text-gray-600 space-y-6 leading-relaxed font-sans"
+                                dangerouslySetInnerHTML={{ __html: product.description }}
+                            />
+                        </div>
+
+                        <div className="mt-16">
                             <button
                                 type="button"
-                                className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+                                className="w-full bg-[#2D2D2D] border border-transparent py-4 px-8 flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white hover:bg-[#8D7B68] transition-colors focus:outline-none sm:w-80"
                             >
                                 Add to bag
                             </button>
+                        </div>
+
+                        <div className="mt-10 border-t border-[#DBC8C0] pt-8">
+                            <div className="flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-gray-400">
+                                <span className="flex items-center gap-2"><Leaf className="w-4 h-4" /> Eco Friendly</span>
+                                <span className="flex items-center gap-2"><RefreshCcw className="w-4 h-4" /> 30 Day Returns</span>
+                            </div>
                         </div>
                     </div>
                 </div>

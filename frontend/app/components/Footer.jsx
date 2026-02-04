@@ -1,83 +1,52 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 border-t border-gray-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div className="mb-8 md:mb-0">
-                        <span className="text-2xl font-bold text-white tracking-tight">
-                            Style<span className="text-indigo-600">Sphere</span>
+        <footer className="bg-white border-t border-[#DBC8C0] mt-40">
+            <div className="max-w-7xl mx-auto py-32 px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-20">
+                    <div className="col-span-1 md:col-span-1">
+                        <span className="text-3xl font-serif tracking-tighter text-[#2D2D2D]">
+                            Trend<span className="text-[#8D7B68] italic">Aura.</span>
                         </span>
-                        <p className="mt-4 text-gray-400 text-sm">
-                            Your one-stop destination for modern fashion. Discover the latest trends and elevate your style with StyleSphere.
-                        </p>
                     </div>
+
                     <div>
-                        <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">Shop</h3>
-                        <ul className="mt-4 space-y-4">
-                            <li>
-                                <a href="/shop" className="text-base text-gray-400 hover:text-white">
-                                    All Products
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-base text-gray-400 hover:text-white">
-                                    Men
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-base text-gray-400 hover:text-white">
-                                    Women
-                                </a>
-                            </li>
+                        <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-8 text-[#8D7B68]">Shop</h4>
+                        <ul className="space-y-5 text-sm text-gray-500 font-sans">
+                            <li><Link href="/shop" className="hover:text-[#2D2D2D] transition-colors">New Arrivals</Link></li>
+                            <li><Link href="/shop" className="hover:text-[#2D2D2D] transition-colors">Accessories</Link></li>
+                            <li><Link href="/shop" className="hover:text-[#2D2D2D] transition-colors">Men</Link></li>
+                            <li><Link href="/shop" className="hover:text-[#2D2D2D] transition-colors">Women</Link></li>
                         </ul>
                     </div>
+
                     <div>
-                        <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">Support</h3>
-                        <ul className="mt-4 space-y-4">
-                            <li>
-                                <a href="#" className="text-base text-gray-400 hover:text-white">
-                                    Contact Us
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-base text-gray-400 hover:text-white">
-                                    FAQs
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-base text-gray-400 hover:text-white">
-                                    Shipping & Returns
-                                </a>
-                            </li>
+                        <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-8 text-[#8D7B68]">About</h4>
+                        <ul className="space-y-5 text-sm text-gray-500 font-sans">
+                            <li><Link href="/about" className="hover:text-[#2D2D2D] transition-colors">Our Story</Link></li>
+                            <li><Link href="/about" className="hover:text-[#2D2D2D] transition-colors">Sustainability</Link></li>
+                            <li><Link href="/about" className="hover:text-[#2D2D2D] transition-colors">Careers</Link></li>
                         </ul>
                     </div>
+
                     <div>
-                        <h3 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">Stay Connected</h3>
-                        <ul className="mt-4 space-y-4">
-                            <li>
-                                <a href="#" className="text-base text-gray-400 hover:text-white">
-                                    Instagram
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-base text-gray-400 hover:text-white">
-                                    Twitter
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-base text-gray-400 hover:text-white">
-                                    Facebook
-                                </a>
-                            </li>
+                        <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-8 text-[#8D7B68]">Support</h4>
+                        <ul className="space-y-5 text-sm text-gray-500 font-sans">
+                            <li><Link href="#" className="hover:text-[#2D2D2D] transition-colors">FAQ</Link></li>
+                            <li><Link href="#" className="hover:text-[#2D2D2D] transition-colors">Shipping & Returns</Link></li>
+                            <li><Link href="#" className="hover:text-[#2D2D2D] transition-colors">Contact Us</Link></li>
                         </ul>
                     </div>
                 </div>
-                <div className="mt-8 border-t border-gray-700 pt-8">
-                    <p className="text-base text-gray-500 text-center">
-                        &copy; {new Date().getFullYear()} StyleSphere. All rights reserved.
-                    </p>
+
+                <div className="border-t border-[#DBC8C0]/50 pt-12 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 font-sans">
+                    <p className="tracking-widest uppercase">&copy; {new Date().getFullYear()} TrendAura. All rights reserved.</p>
+                    <div className="flex space-x-10 mt-6 md:mt-0">
+                        <Link href="#" className="hover:text-[#2D2D2D] transition-all">Privacy Policy</Link>
+                        <Link href="#" className="hover:text-[#2D2D2D] transition-all">Terms of Service</Link>
+                    </div>
                 </div>
             </div>
         </footer>
